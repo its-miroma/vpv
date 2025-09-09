@@ -1,0 +1,62 @@
+{
+  "name": "vitepress-versions",
+  "version": "0.0.1",
+  "description": "Support for multiple versions for VitePress.",
+  "keywords": [
+    "vitepress",
+    "versioning",
+    "versions",
+    "git"
+  ],
+  "homepage": "https://github.com/its-miroma/vpv#readme",
+  "bugs": {
+    "url": "https://github.com/its-miroma/vpv/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "its-miroma",
+    "url": "https://github.com/its-miroma"
+  },
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./dist/src/index.js"
+  },
+  "bin": "./dist/src/cli.js",
+  "types": "./dist/src/index.d.ts",
+  "repository": "its-miroma/vpv",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli.ts",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "@commander-js/extra-typings": "^14.0.0",
+    "p-limit": "^7.1.1",
+    "tinyglobby": "^0.2.15",
+    "vite": "^7.1.7",
+    "vitepress": "^1.6.4",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "@types/node": "^24.5.2",
+    "eslint": "^9.36.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jsdoc": "^60.3.1",
+    "jiti": "^2.6.0",
+    "prettier": "^3.6.2",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.44.1"
+  },
+  "overrides": {
+    "esbuild": "0.25.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.17.1"
+}
