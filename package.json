@@ -1,0 +1,57 @@
+{
+  "name": "vitepress-versions",
+  "version": "0.0.1",
+  "description": "Support for multiple versions for VitePress.",
+  "keywords": [
+    "vitepress",
+    "versioning",
+    "versions",
+    "git"
+  ],
+  "homepage": "https://github.com/its-miroma/vpv#readme",
+  "bugs": {
+    "url": "https://github.com/its-miroma/vpv/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "its-miroma",
+    "url": "https://github.com/its-miroma"
+  },
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "bin": "./dist/cli.js",
+  "types": "dist/index.d.ts",
+  "repository": "its-miroma/vpv",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli.ts",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "commander": "^14.0.1",
+    "tinyglobby": "^0.2.15",
+    "vite": "^7.1.6",
+    "vitepress": "^1.6.4",
+    "zod": "^4.1.9"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "eslint": "^9.35.0",
+    "eslint-config-prettier": "^10.1.8",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.44.0"
+  },
+  "overrides": {
+    "esbuild": "0.25.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.17.0"
+}
