@@ -42,5 +42,16 @@ export default {
     })),
   ],
 
+  mutator: (s, c, v) => {
+    const config = s(c, v);
+    config.userConfig.srcExclude = [
+      ...(config.userConfig.srcExclude ?? []),
+      ...config.versions
+        .filter((otherV) => !path.relative(v.src, otherV.src).startsWith(".."))
+        .map((otherV) => path.relative(v.src, otherV.src)),
+    ];
+    return config;
+  },
+
   setup: () => () => undefined,
 } satisfies Mode<typeof config, VersionFromFolder>;

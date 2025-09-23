@@ -47,5 +47,15 @@ export default {
     })),
   ],
 
+  mutator: (s, c, v) => {
+    const config = s(c, v);
+
+    if (!v.isLatest) {
+      delete config.userConfig.themeConfig?.editLink;
+    }
+
+    return config;
+  },
+
   setup: (v, src) => ("data" in v ? git.setup(v, src) : () => undefined),
 } satisfies Mode<typeof config, VersionFromTag>;

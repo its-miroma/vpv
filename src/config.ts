@@ -3,6 +3,7 @@ import * as tinyglobby from "tinyglobby";
 import * as vite from "vite";
 import * as z from "zod";
 import { zConfig } from "./modes/index.js";
+import type { Config } from "./types.js";
 
 export default async (configPath?: string) => {
   const resolvedPath =
@@ -38,7 +39,7 @@ export default async (configPath?: string) => {
   // TODO: watch rawConfig.dependencies in dev mode
 
   try {
-    return zConfig.parse(rawConfig.config);
+    return zConfig.parse(rawConfig.config) as Config;
   } catch (cause) {
     if (cause instanceof z.ZodError) {
       const issuesLength = cause.issues.length;

@@ -72,8 +72,17 @@ export const zConfigBase = z.object({
     ])
     .optional(),
 
-  /** @todo Hook to mutate the SiteConfig. */
-  configMutator: z.never().optional(),
+  /** Hook to mutate the SiteConfig. */
+  configMutator: z
+    .function({
+      input: [
+        z.unknown(),
+        zVersion,
+        z.function({ input: [z.unknown(), zVersion], output: z.unknown() }),
+      ],
+      output: z.unknown(),
+    })
+    .optional(),
 
   /** Build options. */
   build: z

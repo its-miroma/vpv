@@ -2,7 +2,7 @@ import * as path from "node:path";
 import * as pLimit from "p-limit";
 import * as vitePress from "vitepress";
 import modes from "./modes/index.js";
-import type { Config, Version } from "./types.js";
+import type { Config, ConfigMutator, Version } from "./types.js";
 
 export default async (config: Config, versions: [Version, ...Version[]]) => {
   const limit = pLimit.default(config.build.concurrency);
@@ -69,7 +69,27 @@ export default async (config: Config, versions: [Version, ...Version[]]) => {
     try {
       versionToCleanupMap.set(v, modes[config.mode].setup(v as never, src));
 
-      const buildPromise = vitePress.build(src, { outDir, base });
+      const buildPromise = vitePress.build(src, {
+        outDir,
+        base,
+        onAfterConfigResolve: ((c: Parameters<ConfigMutator>[1]) => {
+          try {
+            // user-defined mutator, may call s (super) mutator
+            const mutate = config.configMutator ?? (((s, c, v) => s(c, v)) as ConfigMutator);
+
+            // mode-specific mutator
+            const modeMutate = modes[config.mode].mutator as ConfigMutator;
+
+            // VitePress does not really provide an access point for mutating the config.
+            // onAfterConfigResolve is only supposed to be used for logging, but the SiteConfig
+            // object is passed to it directly, allowing mutation. this is most likely unintended.
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars -- mutating config
+            c = mutate((c) => modeMutate((c) => ({ ...c }), c, v), { ...c, versions }, v);
+          } catch (cause) {
+            throw new Error(`failed to mutate config of '${src}'`, { cause });
+          }
+        }) as never,
+      });
 
       // TODO: an abort cannot kill VitePress' build, because it does not take an abort signal
       const abortPromise = new Promise((_, reject) => {

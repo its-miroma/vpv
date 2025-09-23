@@ -91,10 +91,9 @@ Add the scripts to `package.json`:
 
 ## Known Issues
 
-- There is currently no way to edit the Vitepress SiteConfig before build
-  - There is no nav bar item for selecting a version
-  - There is no way to add a warning banner for outdated versions
-  - There is no way to hide outdated pages from search
+- There is no nav bar item for selecting a version by default
+- There is no warning banner for outdated versions by default
+- Outdated pages are not hidden from search by default
 - There is no way to build a single version except the default
 - There is no way of accessing version data from the theme / content
   - There is no way of knowing in which versions a page is available

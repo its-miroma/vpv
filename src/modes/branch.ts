@@ -29,5 +29,7 @@ export default {
           : undefined,
     })),
 
+  mutator: (s, c, v) => s(c, v),
+
   setup: git.setup,
 } satisfies Mode<typeof config, VersionFromBranch>;
