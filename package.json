@@ -36,7 +36,7 @@
     "@commander-js/extra-typings": "^14.0.0",
     "p-limit": "^7.1.1",
     "tinyglobby": "^0.2.15",
-    "vite": "^7.1.7",
+    "vite": "^7.1.11",
     "vitepress": "^1.6.4",
     "zod": "^4.1.11"
   },
